@@ -1,7 +1,6 @@
 package validacion;
 
-import gestora.GeneracionClaveSimetrica3DES;
-import gestora.Gestora;
+import gestora.GenerarClave;
 import salida.Mensaje;
 
 import java.util.Scanner;
@@ -36,12 +35,32 @@ public class Validacion {
         do{
             Mensaje.mostrarMenuClave();
             respuesta = teclado.next();
-        }while(!respuesta.equals(GeneracionClaveSimetrica3DES.CLAVE_AES)
-                &&!respuesta.equals(GeneracionClaveSimetrica3DES.CLAVE_DES)
-                &&!respuesta.equals(GeneracionClaveSimetrica3DES.CLAVE_DESede));
+        }while(!respuesta.equals(GenerarClave.CLAVE_AES)
+                &&!respuesta.equals(GenerarClave.CLAVE_DES)
+                &&!respuesta.equals(GenerarClave.CLAVE_DESede));
         return respuesta;
      }
      public static String validarString(){
         return teclado.next();
      }
+     public static String validarNombreFicheroClave(){
+        Mensaje.mostrarString(Mensaje.INSERTE_NOMBRE_FICHERO_CLAVE);
+        return validarString()  + ".raw";
+     }
+     public static String validarNombreFicheroAEncriptar(){
+         Mensaje.mostrarString(Mensaje.INSERTE_NOMBRE_FICHERO_A_ENCRIPTAR);
+         return validarString();
+     }
+     public static String validarNombreFicheroEncriptado(){
+         Mensaje.mostrarString(Mensaje.INSERTE_NOMBRE_FICHERO_ENCRIPTADO);
+         return validarString();
+     }
+    public static String validarNombreFicheroADesencriptar(){
+        Mensaje.mostrarString(Mensaje.INSERTE_NOMBRE_FICHERO_A_DESENCRIPTAR);
+        return validarString();
+    }
+    public static String validarNombreFicheroDesencriptado(){
+        Mensaje.mostrarString(Mensaje.INSERTE_NOMBRE_FICHERO_DESENCRIPTADO);
+        return validarString();
+    }
 }

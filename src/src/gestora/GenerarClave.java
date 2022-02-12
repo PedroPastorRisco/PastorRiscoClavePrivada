@@ -1,5 +1,6 @@
 package gestora;
 
+import salida.Mensaje;
 import validacion.Validacion;
 
 import javax.crypto.KeyGenerator;
@@ -7,14 +8,14 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.DESedeKeySpec;
-import javax.crypto.spec.PBEKeySpec;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 
-public class GeneracionClaveSimetrica3DES {
+public class GenerarClave {
 
     public static final String CLAVE_AES="AES";
     public static final String CLAVE_DES="DES";
@@ -57,7 +58,7 @@ public class GeneracionClaveSimetrica3DES {
      * Postcondiciones: Determina el nombre del fichero
      */
     private static void determinarFicheroClaveSimetrica(){
-        nomFichClave = Validacion.validarString();
+        nomFichClave = Validacion.validarNombreFicheroClave();
     }
     /**
      * Cabecera: private static SecretKey generarKey()
@@ -92,7 +93,9 @@ public class GeneracionClaveSimetrica3DES {
         SecretKeyFactory keySpecFactory = null;
 
         try {
-            keySpecFactory = SecretKeyFactory.getInstance(algoritmoClaveSimetrica);
+            if(!algoritmoClaveSimetrica.equals(CLAVE_AES)){
+                keySpecFactory = SecretKeyFactory.getInstance(algoritmoClaveSimetrica);
+            }
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
@@ -110,8 +113,8 @@ public class GeneracionClaveSimetrica3DES {
         byte[] valorClave = null;
 
         switch(algoritmoClaveSimetrica){
-            case CLAVE_AES -> valorClave = usarDesKeySpec(keySpecFactory,clave);
-            case CLAVE_DES ->  valorClave = usarAesKeySpec(keySpecFactory,clave);
+            case CLAVE_AES -> valorClave = usarAesKeySpec(clave);
+            case CLAVE_DES ->  valorClave = usarDesKeySpec(keySpecFactory,clave);
             case CLAVE_DESede -> valorClave = usarDesedeSpec(keySpecFactory,clave);
         }
         return valorClave;
@@ -143,16 +146,11 @@ public class GeneracionClaveSimetrica3DES {
      * Precondiciones: Ninguna
      * Postcondiciones: Devuelve un valorClave en forma de array de bytes
      */
-    private static byte[] usarAesKeySpec(SecretKeyFactory keySpecFactory,SecretKey clave) {
-        byte[] valorClave = null;
+    private static byte[] usarAesKeySpec(SecretKey clave) {
+        byte[] valorClave = clave.getEncoded();
 
-        try {
-            PBEKeySpec PBE = (PBEKeySpec) keySpecFactory.getKeySpec(clave, PBEKeySpec.class);
-            valorClave = new String(PBE.getPassword()).getBytes();
-        } catch (InvalidKeySpecException e) {
-            e.printStackTrace();
-        }
-        return valorClave;
+        SecretKeySpec skeySpec = new SecretKeySpec(valorClave, CLAVE_AES);
+        return skeySpec.getEncoded();
     }
     /**
      * Cabecera: private static byte[] usarDesKeySpec(SecretKeyFactory keySpecFactory,SecretKey clave)
@@ -184,6 +182,7 @@ public class GeneracionClaveSimetrica3DES {
     private static void escribirKeyEnElFichero(byte[] valorClave){
         try(FileOutputStream fos = new FileOutputStream(nomFichClave)) {
             fos.write(valorClave);
+            Mensaje.mostrarString(Mensaje.CLAVE_HECHA);
         } catch (IOException e) {
             System.out.println("Error de E/S escribiendo clave en fichero");
             e.printStackTrace();

@@ -1,20 +1,17 @@
 package salida;
 
 public class Mensaje {
-    public static final String INSERTE_NUMERO="Introduzca un numero del 0 al 5";
+    public static final String INSERTE_NOMBRE_FICHERO_CLAVE = "Introduce el nombre del fichero de la clave (sin extension)";
+    public static final String INSERTE_NOMBRE_FICHERO_A_ENCRIPTAR = "Introduce el nombre del fichero a encriptar (con extension)";
+    public static final String INSERTE_NOMBRE_FICHERO_ENCRIPTADO = "Introduce el nombre del fichero una vez desencriptado (sin extension)";
+    public static final String INSERTE_NOMBRE_FICHERO_A_DESENCRIPTAR = "Introduce el nombre del fichero a desencriptar (con extension)";
+    public static final String INSERTE_NOMBRE_FICHERO_DESENCRIPTADO = "Introduce el nombre del fichero desencriptado (sin extension)";
+    public static final String INSERTE_NUMERO="Introduzca un numero del 0 al 3";
     public static final String PROGRAMA_FINALIZADO="Cerrando el programa...";
-    public static final String FICHEROS_CREADOS="Ficheros creados correctamente";
-    public static final String FICHEROS_NO_CREADOS="Ha habido un error en la creacion, contácte con su profesor más cercano.";
-    public static final String INSERTE_NOMBRE="Por favor, introduzca el nombre del cliente (No puede ser mayor de 25 caracteres).";
-    public static final String INSERTE_APELLIDOS="Por favor, introduzca los apellidos del cliente (No puede ser mayor de 25 caracteres).";
-    public static final String INSERTE_DNI="Por favor, introduzca el dni del cliente. Recuerda que debe tener 9 caracteres, 8 numeros y su letra correspondiente";
-    public static final String LONGITUD_DNI_NO_VALIDA="La longitud del dni introducido no es valida, recuerda que debe tener 9 caracteres.";
-    public static final String NUMERO_DNI_NO_VALIDO="El numero introducido no puede tener caracteres que no sean numeros.";
-    public static final String LETRA_DNI_VALIDA="La letra introducida no corresponde con el numero introducido.";
-    public static final String INSERTE_DIRECCION="Por favor, introduzca la direccion del cliente (No puede ser mayor de 30 caracteres).";
-    public static final String INSERTE_NUMERO_TELEFONO="Por favor, introduzca el numero de telefono del cliente.";
-    public static final String CLIENTE_NO_ENCONTRADO="El dni que ha introducido no corresponde a ningún cliente guardado o se corresponde con un cliente eliminado";
-    public static final String CLIENTE_BORRADO="El cliente se ha borrado correctamente";
+    public static final String CLAVE_HECHA = "Fichero generado con la clave";
+    public static final String FICHERO_ENCRIPTADO = "Fichero encriptado hecho";
+    public static final String FICHERO_DESENCRIPTADO = "Fichero desencriptado hecho";
+
     /**
      * Cabecera: public static void mostrarMenu()
      *
