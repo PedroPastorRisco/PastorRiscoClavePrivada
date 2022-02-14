@@ -13,7 +13,7 @@ public class Desencriptar {
     public static final String TERMINACION_DESENCRIPTADO = ".decript";
 
     /**
-     * Cabecera: public static void cifrar(String ficheroClave, String algoritmo)
+     * Cabecera: public static void descifrar(String ficheroClave, String algoritmo)
      *
      * Descripcion: Este metodo se encarga de descifrar un fichero con una clave
      *
@@ -51,7 +51,7 @@ public class Desencriptar {
     }
 
     /**
-     * Cabecera:private static Cipher crearCifrado(String algoritmo, byte[] valorClave)
+     * Cabecera:private static Cipher crearDescifrado(String algoritmo, byte[] valorClave)
      * Descripcion: Este metodo se encarga de generar el cifrado
      * Precondiciones:nombreFichero, algoritmo y valorClave diferentes de null
      * Postcondiciones: Cipher devuelto

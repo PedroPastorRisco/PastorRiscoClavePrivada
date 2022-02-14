@@ -3,6 +3,7 @@ package validacion;
 import gestora.GenerarClave;
 import salida.Mensaje;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Validacion {
@@ -21,11 +22,15 @@ public class Validacion {
      * @return int respuesta
      */
     public static int validarNumero0al3(){
-        int respuesta;
+        int respuesta = 4;
 
         do{
-            Mensaje.mostrarString(Mensaje.INSERTE_NUMERO);
-            respuesta=tecladoInt.nextInt();
+            try{
+                Mensaje.mostrarString(Mensaje.INSERTE_NUMERO);
+                respuesta=tecladoInt.nextInt();
+            }catch(InputMismatchException e){
+                tecladoInt.next();
+            }
         }while((respuesta!=1)&&(respuesta!=2)&&(respuesta!=3)&&(respuesta!=0));
         return respuesta;
     }
